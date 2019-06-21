@@ -12,7 +12,11 @@ def loop_ranger(start, stop=None, step=1):
     The look up the docs for range(), you can answer this with just the range 
     function, but we'd like you to do it the long way, probably using a loop.
     """
-    return None
+    my_list = []
+
+    for _i in range(start,stop,step):
+        my_list.append(_i)
+    return my_list
 
 
 def lone_ranger(start, stop, step):
@@ -29,7 +33,10 @@ def two_step_ranger(start, stop):
     Sometimes you want to hide complexity.
     Make a range function that always has a step size of 2
     """
-    return None
+    my_list = []
+    for _i in range(start,stop,2):
+        my_list.append(_i)
+    return my_list
 
 
 def stubborn_asker(low, high):

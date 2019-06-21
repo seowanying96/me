@@ -26,18 +26,16 @@ def fix_it(moves=True, should_move=True):
     Most people write this function with 4 return statements. 
     As an extra challenge, see if you can get that down to three.
     """
-    Answer = ["WD-40", "Duct Tape", "no Problem"]
+    
 
-    if moves == True:
-        if should_move != True:
-            return Answer[2]
-        else:
-            return Answer[1]
-    else:
-        if should_move == True:
-            return Answer[0]
-        else:
-            return Answer[2]
+    if moves == True and should_move == True:
+        return "No Problem"
+    elif moves == False and should_move == False:
+        return "No Problem"
+    elif moves == True and should_move == False:
+        return "Duct Tape"
+    elif moves == False and should_move == True:
+        return "WD-40"
 
 
 
@@ -94,7 +92,7 @@ def loops_2():
     for _x in range (0, 10):
         field.append([])
         for _y in range(10):
-            field.append('*')
+            field[_x].append('*')
         
     return field
 
@@ -119,16 +117,13 @@ def loops_3():
     TIP: notice that this needs to to return strings of numbers,
          so call str(number) to cast.
     """
-    w = 0
+   
     listofnumber =[]
-    tmp = []
 
     for _x in range(0, 10):
+        listofnumber.append([])
         for _y in range(0, 10):
-            tmp.append(str(w))
-        listofnumber.append(tmp)
-        w + 1
-
+            listofnumber[_x].append(str(_x))
 
     return listofnumber
 
@@ -150,13 +145,12 @@ def loops_4():
       ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     ]
     """
-    w = 0
     list_number = []
-    tmp = []
+    
     for _x in range(0, 10):
+        list_number.append([])
         for _y in range(0, 10):
-            tmp.append(str(w))
-            i + 1
+            list_number[_x].append(str(_y))
 
     return list_number
 
@@ -190,7 +184,7 @@ def loops_5():
     for i in range(0, 10):
         coordinate_list.append([])
         for j in range(0, 5):
-            coordinate_list[i].append(str("(i" + str(i)+","+"j" +str(j)+")"))
+            coordinate_list[i].append("(i" + str(i) + ", j" + str(j) + ")")
     
     return coordinate_list
 
@@ -247,21 +241,19 @@ def loops_7():
     This is a hard problem. Use lots of experimentation and draw
     lots of diagrams!
     """
-   
-rows = 5
-column = 5
-my_list = []
+    my_list = []   
+    rows = 5
 
-for i in range(rows):
-    star = int(i*2 + 1)
-    space = int((rows*2 - star)/2)
-    my_list.append([])
-    for j in range(column):
-        my_list[i].append(' ')
-    for k in range(star):
-        my_list[i].append('*')
-    for m in range(column):
-        my_list[i].append(' ')
+    for i in range(rows):
+        star = int(i * 2 + 1)
+        _space = int((rows * 2 - star)/2)
+        my_list.append([])
+        for _j in range(_space):
+            my_list[i].append(' ')
+        for _k in range(star):
+            my_list[i].append('*')
+        for _m in range(_space):
+            my_list[i].append(' ')
 
     return my_list
 
