@@ -33,10 +33,19 @@ def get_some_details():
          dictionary, you'll need integer indeces for lists, and named keys for
          dictionaries.
     """
-    json_data = open(LOCAL + "/lazyduck.json").read()
 
+
+ 
+
+    #open file and then read. in coding opening , reading is different thing
+    json_data = open(LOCAL + "/lazyduck.json").read()
+    #json is for every language, transfer langauge everywhere
+    #convert fromjson string to a dictionary
     data = json.loads(json_data)
-    return {"lastName": None, "password": None, "postcodePlusID": None}
+    lastname = data["results"][0]["name"]["last"]
+    password = data["results"][0]["login"]["password"]
+    postcodePlusID = int(data["results"][0]["location"]["postcode"]) +int(data["results"][0]["id"]["value"])
+    return { "lastName": lastname, "password": password, "postcodePlusID": postcodePlusID}
 
 
 def wordy_pyramid():
@@ -74,32 +83,43 @@ def wordy_pyramid():
     ]
     TIP: to add an argument to a URL, use: ?argName=argVal e.g. &minLength=
     """
+    url = ""
+
+    _pull = requests.get(url)
+
     pass
 
+    
 
-def wunderground():
-    """Find the weather station for Sydney.
-
-    Get some json from a request parse it and extract values.
-    Sign up to https://www.wunderground.com/weather/api/ and get an API key
+def pokedex(low=1, high=5):
+    """ Return the name, height and weight of the tallest pokemon in the range low to high.
+    Low and high are the range of pokemon ids to search between.
+    Using the Pokemon API: https://pokeapi.co get some JSON using the request library
+    (a working example is filled in below).
+    Parse the json and extract the values needed.
+    
     TIP: reading json can someimes be a bit confusing. Use a tool like
          http://www.jsoneditoronline.org/ to help you see what's going on.
     TIP: these long json accessors base["thing"]["otherThing"] and so on, can
          get very long. If you are accessing a thing often, assign it to a
          variable and then future access will be easier.
     """
-    base = "http://api.wunderground.com/api/"
-    api_key = "YOUR KEY - REGISTER TO GET ONE"
-    country = "AU"
-    city = "Sydney"
-    template = "{base}/{key}/conditions/q/{country}/{city}.json"
-    url = template.format(base=base, key=api_key, country=country, city=city)
-    r = requests.get(url)
-    if r.status_code is 200:
-        the_json = json.loads(r.text)
-        obs = the_json["current_observation"]
+    template = "https://pokeapi.co/api/v2/pokemon/{id}"
 
-    return {"state": None, "latitude": None, "longitude": None, "local_tz_offset": None}
+    tall = 0
+    for i in range(low,high):
+        url = template.format(base=template, id=i)
+        r = requests.get(url)
+        if r.status_code is 200:
+            the_json = json.loads(r.text)
+            tallnew = the_json["height"]
+            if tallnew > tall:
+                tall = tallnew
+                name = the_json["name"]  
+                weight = the_json["weight"]
+                height = the_json["height"] 
+    return {"name": name, "weight": weight, "height": height}
+
 
 
 def diarist():
@@ -115,7 +135,15 @@ def diarist():
     TIP: remember to commit 'lasers.pew' and push it to your repo, otherwise
          the test will have nothing to look at.
     """
-    pass
+    gcode_data = open(LOCAL + "/Trispokedovetiles(laser).gcode").readlines()
+    number_of_times = 0
+    for cactusLine in gcode_data:
+        print(cactusLine)
+        if "M10 P1" in cactusLine:
+            number_of_times += 1
+    f = open("lasers.pew", "w")
+    f.write(str(number_of_times))
+    f.close
 
 
 if __name__ == "__main__":
