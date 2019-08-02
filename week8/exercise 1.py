@@ -204,7 +204,10 @@ def fast_filler(number_of_words=200):
     import json
     filepath = "dict_rancy.json"
     if os.path.isfile(filepath):
-        jsnfile
+        jsnfile = open(filepath,'r')
+        Dict = make_filler_text_dictionary()
+        
+
 
 
     return paragraph
